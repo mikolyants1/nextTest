@@ -1,0 +1,43 @@
+import { Control, form } from "@/components/types/types";
+import { Box, Flex, Input } from "@chakra-ui/react"
+import { memo } from "react";
+import { Controller, useFormContext} from 'react-hook-form'
+
+interface props {
+    title:string,
+    Name:"name"|"pass"
+}
+
+function LoginInput({title,Name}:props):JSX.Element{
+  const {control} = useFormContext<form>();
+    return (
+       <Flex w='90%' bg='white'
+         alignItems='center'
+         flexDirection='column'
+         m='10px auto'>
+          <Box w='100%'
+            fontSize={18}>
+            {title}
+          </Box>
+          <Controller
+           control={control}
+           name={Name}
+           render={({field}):JSX.Element=>{
+             const {onChange,name,value
+             }:Control<`${typeof Name}`> = field;
+             return (
+                <Input w='100%'
+                 bg='rgb(240,240,240)'
+                 placeholder={title}
+                 borderRadius={10}
+                 onChange={onChange}
+                 value={value}
+                 name={name}
+                />
+             )}}
+          />
+       </Flex>
+    )
+}
+
+export default memo(LoginInput);
