@@ -1,5 +1,5 @@
 import Header from '@/components/ui/body/Header'
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 
 interface props {
     children:ReactNode

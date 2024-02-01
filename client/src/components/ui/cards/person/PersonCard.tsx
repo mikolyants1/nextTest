@@ -5,6 +5,7 @@ import PersonTextArea from '../../inputs/PersonTextArea'
 import PersonUpdateButton from '../../buttons/person/PersonUpdateButton'
 import { FormProvider, useForm } from 'react-hook-form'
 import { IPostForm } from '@/components/types/types'
+import PersonCardWrapper from '../../wrappers/cards/PersonCardWrapper'
 
 interface props {
     text:string,
@@ -17,17 +18,11 @@ function PersonCard({text,title}:props):JSX.Element {
     });
   return (
    <FormProvider {...methods}>
-    <Flex w={600} bg='black'
-     borderRadius={20}
-     overflow='hidden'
-     flexDir='column'
-     alignItems='center'
-     justifyContent='space-around'
-     h={400} m='30px auto'>
+    <PersonCardWrapper>
       <PersonInput />
       <PersonTextArea />
       <PersonUpdateButton />
-    </Flex>
+    </PersonCardWrapper>
   </FormProvider>
   )
 }

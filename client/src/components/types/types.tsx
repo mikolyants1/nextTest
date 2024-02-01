@@ -8,13 +8,14 @@ import { ChangeEvent } from "react";
 
 export interface initial {
   name:string,
-  id:string
+  id:string,
+  token:string
 }
 export type select = ReturnType<typeof store.getState>;
 
 export type dispatch = typeof store.dispatch;
 
-export const useAppDispatch:()=>dispatch = useDispatch;
+export const useAppDispatch:()=> dispatch = useDispatch;
 
 export const useAppSelector:TypedUseSelectorHook<select> = useSelector;
 
@@ -37,6 +38,10 @@ export interface query {
   isError:boolean
 }
 
+export interface IParams {
+  id:string
+};
+
 export type Und<T> = undefined | T;
 
 export interface IStore {
@@ -47,7 +52,8 @@ export type form = Omit<IUser,"_id"|'posts'>;
 export type Control<T extends string> = ControllerRenderProps<FieldValues,T>;
 
 export interface ICheck {
-   _id:string
+   _id:string,
+   token:string
 }
 export interface res<T> {
   url:string

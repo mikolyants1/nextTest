@@ -1,7 +1,7 @@
 'use client'
 
 import { useGetUserQuery } from '@/components/store/api/endpoints/UserEndPoints';
-import { IPost, IUser} from '@/components/types/types';
+import { IParams, IPost, IUser, query} from '@/components/types/types';
 import AccordionCard from '@/components/ui/cards/main/AccordionCard';
 import ItemCard from '@/components/ui/cards/main/ItemCard';
 import Error from '@/components/ui/load/Error';
@@ -9,19 +9,17 @@ import Loading from '@/components/ui/load/Loading';
 import { Flex } from '@chakra-ui/react';
 
 interface props {
-  params:{
-    id:string
-  }
+  params:IParams
 };
 
-function page({params}:props):JSX.Element {
- const {data,isError,isLoading} = useGetUserQuery(params.id);
+function page({params:{id}}:props):JSX.Element {
+ const {data,isError,isLoading} = useGetUserQuery<query>(id);
   if (isLoading) return <Loading />;
   if (isError) return <Error />;
   console.log(data)
   return (
     <>
-      <AccordionCard id={params.id} />
+      <AccordionCard id={id} />
       <Flex w='90%' flexWrap='wrap'
         rowGap={10} columnGap={10}
         justifyContent='center'

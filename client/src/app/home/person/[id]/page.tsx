@@ -1,22 +1,17 @@
 'use client'
 
 import { IdContext } from '@/components/helpers/context';
-import { useChanPostMutation } from '@/components/store/api/endpoints/PostEndPoints';
 import { useGetUserQuery } from '@/components/store/api/endpoints/UserEndPoints';
 import { getId } from '@/components/store/store/store';
-import { IPost, IPostForm, IUser, Und, query, useAppSelector } from '@/components/types/types';
+import { IParams, IPost,IUser, Und, query, useAppSelector } from '@/components/types/types';
 import PersonCard from '@/components/ui/cards/person/PersonCard';
-import PersonInput from '@/components/ui/inputs/PersonInput';
-import PersonTextArea from '@/components/ui/inputs/PersonTextArea';
 import PersonLink from '@/components/ui/links/PersonLink';
 import Error from '@/components/ui/load/Error';
 import Loading from '@/components/ui/load/Loading';
 import React from 'react'
 
 interface props {
-    params:{
-        id:string
-    }
+    params:IParams
 }
 
 function page({params}:props):JSX.Element {
@@ -24,7 +19,7 @@ function page({params}:props):JSX.Element {
   const userId:string = useAppSelector(getId);
   const {data,isLoading,isError} = useGetUserQuery<query>(userId);
   
-  const getPost = (id:string,{posts}:IUser)=>{
+  const getPost = (id:string,{posts}:IUser):Und<IPost>=>{
     const post:Und<IPost> = posts.find((i:IPost)=>i._id == id);
     if (!post) return;
     return post

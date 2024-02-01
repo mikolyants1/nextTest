@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+  import axios, { AxiosResponse } from "axios";
 import { IUser } from "../types/types";
 
 async function getUser(id:string):Promise<IUser> {

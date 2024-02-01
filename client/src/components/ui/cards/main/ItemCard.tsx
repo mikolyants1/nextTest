@@ -8,6 +8,7 @@ import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.share
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react'
 import ItemButtons from '../../buttons/main/item/ItemButtons';
+import ItemCardWrapper from '../../wrappers/cards/ItemCardWrapper';
 
 interface props {
     title:string,
@@ -23,11 +24,7 @@ function ItemCard({text,title,_id}:props):JSX.Element {
  },[]);
  
   return (
-    <Grid minW={300}
-     bg='black' borderRadius={10}
-     h={400} color='white'
-     boxSizing="border-box" p={2}
-     gridTemplateRows='40px 1fr 50px'>
+    <ItemCardWrapper>
        <Box textAlign='center'
         fontSize={20} fontWeight='bold'
         borderBottom='1px solid white'>
@@ -40,7 +37,7 @@ function ItemCard({text,title,_id}:props):JSX.Element {
         del={del}
         id={_id}
         />
-    </Grid>
+    </ItemCardWrapper>
   )
 }
 

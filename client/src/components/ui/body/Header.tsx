@@ -5,14 +5,12 @@ import { useAppSelector } from '@/components/types/types'
 import { Box, Flex } from '@chakra-ui/react';
 import Link from 'next/link';
 import {memo} from 'react'
+import HeaderWrapper from '../wrappers/body/HeaderWrapper';
 
 function Header():JSX.Element {
  const name:string = useAppSelector(getName);
   return (
-    <Flex w='100%' bg='black' h='70px'
-     justifyContent='space-between'
-     fontSize={20}alignItems='center'
-      color='white'>
+    <HeaderWrapper>
       <Box w={100}
        textAlign='center'>
         {name}
@@ -27,7 +25,7 @@ function Header():JSX.Element {
            exit
         </Link>
       </Box>
-    </Flex>
+    </HeaderWrapper>
   )
 }
 

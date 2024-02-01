@@ -3,7 +3,8 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState:initial = {
     name:"",
-    id:""
+    id:"",
+    token:""
 }
 
 const slice = createSlice({
@@ -15,6 +16,9 @@ const slice = createSlice({
       },
       setId:(state:initial,action:pay<string>):void=>{
         state.id = action.payload;
+      },
+      setToken:(state:initial,action:pay<string>):void=>{
+        state.token = action.payload;
       }
     }
 });

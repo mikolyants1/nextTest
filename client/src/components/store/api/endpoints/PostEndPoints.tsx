@@ -19,7 +19,7 @@ const PostEndPoints = PostApi.injectEndpoints({
           },
           invalidatesTags:['posts']
         }),
-        delPost:build.mutation<IUser[],bodyPost<ICheck>>({
+        delPost:build.mutation<IUser[],bodyPost<Omit<ICheck,"token">>>({
           query:(arg:bodyPost<ICheck>):res<ICheck>=>{
            const {id,...body}:bodyPost<ICheck> = arg;
             return {

@@ -23,7 +23,7 @@ export default function LoginCard({isHome,children}:props):JSX.Element {
  const title:string = isHome ? 'Entrance' : 'Registration';
  const [error,setError] = useState<boolean>(false);
  const [addUser] = useAddUserMutation();
- const {setName,setId} = useAction();
+ const {setName,setId,setToken} = useAction();
  const methods = useForm<form>({
   defaultValues:{name:"",pass:""}
  });
@@ -40,6 +40,8 @@ export default function LoginCard({isHome,children}:props):JSX.Element {
       if (isHome){
        setName(date.name);
        setId(data._id);
+       console.log(data.token)
+       setToken(data.token);
        router.push(`/home/main/${data._id}`);
       } else addUser(date);
     } catch(e) {

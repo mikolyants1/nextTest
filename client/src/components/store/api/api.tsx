@@ -7,6 +7,14 @@ const PostApi = createApi({
     tagTypes:['posts'],
     baseQuery:fetchBaseQuery({
       baseUrl:"http://localhost:5000/",
+      prepareHeaders:(header:Headers,{getState})=>{
+        const get:any = getState();
+        const token:string = get.posts.token;
+        if (token){
+         header.set("authorization",`Bearer ${token}`);
+        };
+       return header;
+      }
     }),
     endpoints:()=>({})
 });
