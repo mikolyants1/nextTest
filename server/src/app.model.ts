@@ -3,6 +3,7 @@ import { Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
 
 @Schema()
 export class Posts extends Document {
+  
    @Prop({
     type:String,
     required:true
@@ -25,7 +26,7 @@ export class User extends Document {
    name:string;
 
    @Prop({
-     type:String,
+     type:String, 
      required:true
    })
    pass:string;

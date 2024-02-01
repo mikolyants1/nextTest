@@ -1,11 +1,9 @@
 import { Module } from "@nestjs/common";
 import { CheckController } from "./check.controller";
 import { CheckService } from "./check.sevice";
-import * as env from 'dotenv'
 import { MongooseModule } from "@nestjs/mongoose";
 import { User, UserSchema } from "src/app.model";
-
-env.config();
+import { AuthService } from "src/auth.service";
 
 @Module({
     imports:[
@@ -13,7 +11,7 @@ env.config();
         {name:User.name,schema:UserSchema}
       ]),
     ],
-    providers:[CheckService],
+    providers:[CheckService,AuthService],
     controllers:[CheckController]
 })
 export class CheckModule {}

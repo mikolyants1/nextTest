@@ -27,6 +27,9 @@ export class IUser {
 export class Id {
     @IsString()
     _id:string;
+
+    @IsString()
+    token:string;
 }
 
 export type Null<T> = T | null;

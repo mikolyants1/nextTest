@@ -1,12 +1,10 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from "@nestjs/common";
 import { PostsController } from "./posts.controller";
 import { PostsService } from "./posts.service";
-import * as env from 'dotenv'
 import { MongooseModule } from "@nestjs/mongoose";
 import { User, UserSchema } from "src/app.model";
-import { LogBody, LogParams } from "src/app.middleware";
-
-env.config();
+import { CHeckAuthToken, LogBody, LogParams } from "src/app.middleware";
+import { AuthService } from "src/auth.service";
 
 @Module({
     imports:[
@@ -14,12 +12,12 @@ env.config();
         {name:User.name,schema:UserSchema}
       ]),
     ],
-    providers:[PostsService],
+    providers:[PostsService,AuthService],
     controllers:[PostsController]
 })
 export class PostModule implements NestModule {
    configure(consumer: MiddlewareConsumer) {
-     consumer.apply(LogBody,LogParams)
-     .forRoutes({path:'/:id',method:RequestMethod.ALL});
+     consumer.apply(LogBody,LogParams,CHeckAuthToken)
+     .forRoutes('posts');
    };
 };

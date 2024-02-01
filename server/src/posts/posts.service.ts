@@ -1,9 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { Inject, Injectable } from "@nestjs/common";
+import { ExceptionsHandler } from "@nestjs/core/exceptions/exceptions-handler";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { IPosts, IUser, Null } from "src/app.dto";
 import { User } from "src/app.model";
-
 
 @Injectable()
 export class PostsService {
