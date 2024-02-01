@@ -3,7 +3,7 @@
 import { response } from '@/components/helpers/response'
 import { useAddUserMutation } from '@/components/store/api/endpoints/UserEndPoints'
 import { useAction } from '@/components/store/store/store'
-import { ICheck,form } from '@/components/types/types'
+import { ICheck,fields,form } from '@/components/types/types'
 import LoginInputs from '@/components/ui/inputs/LoginInputs'
 import { Box, Button, Flex } from '@chakra-ui/react'
 import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
@@ -12,6 +12,8 @@ import React, { useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 import LoginErrorCard from './LoginErrorCard'
 import { CheckData } from '@/components/helpers/checkUser'
+import LoginCardWrapper from '../../wrappers/cards/LoginCardWrapper'
+import LoginButton from '../../buttons/login/LoginButton'
 
 interface props {
   isHome:boolean,
@@ -27,7 +29,11 @@ export default function LoginCard({isHome,children}:props):JSX.Element {
  const methods = useForm<form>({
   defaultValues:{name:"",pass:""}
  });
- const {handleSubmit,reset} = methods;
+ const fields:fields[] = [
+  {Name:'name',title:'name'},
+  {Name:'pass',title:'password'}
+ ];
+ const {reset} = methods;
 
  const submit:SubmitHandler<form> = async (date):Promise<void> => {
    try {
@@ -40,7 +46,6 @@ export default function LoginCard({isHome,children}:props):JSX.Element {
       if (isHome){
        setName(date.name);
        setId(data._id);
-       console.log(data.token)
        setToken(data.token);
        router.push(`/home/main/${data._id}`);
       } else addUser(date);
@@ -53,34 +58,28 @@ export default function LoginCard({isHome,children}:props):JSX.Element {
  
   return (
     <FormProvider {...methods}>
-      <Box w={400} m='100px auto'
-       bg='white' borderRadius={20}
-       boxShadow='0px 1px 1px 0px black'
-       minH={300} overflow='hidden'>
+      <LoginCardWrapper>
         <Box fontSize={25}
          fontWeight='bold'
          textAlign='center'>
           {title}
         </Box>
-        <LoginInputs
-         title='name'
-         Name='name'
-         />
-         <LoginInputs
-          title='password'
-          Name='pass'
-         />
-         <Flex mt={5}
-          justifyContent='center'>
-           <Button w={150}
-            colorScheme='green'
-            onClick={handleSubmit(submit)}>
-             {isHome ? 'login' : 'regist'}
-           </Button>
-         </Flex>
-         <LoginErrorCard error={error} />
+        <>
+         {fields.map((i:fields):JSX.Element=>(
+           <LoginInputs
+            key={i.Name}
+            title={i.title}
+            Name={i.Name}
+           />
+          ))}
+        </>
+         <LoginButton
+          isHome={isHome}
+          submit={submit}
+          />
+        <LoginErrorCard error={error} />
           {children}
-      </Box>
+      </LoginCardWrapper>
     </FormProvider>
   )
 };

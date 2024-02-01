@@ -20,8 +20,7 @@ function PersonInput():JSX.Element {
            onChange={onChange}
            value={value}
           />
-         )
-       }}
+         )}}
       />
     </>
   )

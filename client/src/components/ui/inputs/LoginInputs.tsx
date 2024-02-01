@@ -1,14 +1,9 @@
-import { Control, form } from "@/components/types/types";
+import { Control, fields, form } from "@/components/types/types";
 import { Box, Flex, Input } from "@chakra-ui/react"
 import { memo } from "react";
 import { Controller, useFormContext} from 'react-hook-form'
 
-interface props {
-    title:string,
-    Name:"name"|"pass"
-}
-
-function LoginInput({title,Name}:props):JSX.Element{
+function LoginInput({title,Name}:fields):JSX.Element{
   const {control} = useFormContext<form>();
     return (
        <Flex w='90%' bg='white'

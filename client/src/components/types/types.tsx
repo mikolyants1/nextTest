@@ -70,6 +70,10 @@ export interface IPostForm {
   title:string
 }
 
+export interface fields {
+  Name:"name"|"pass",
+  title:string
+}
 export type bodyPost<T> = T&{id:string};
 
 export type EvtC<T> = ChangeEvent<T>;

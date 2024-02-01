@@ -6,7 +6,7 @@ import AccordionCard from '@/components/ui/cards/main/AccordionCard';
 import ItemCard from '@/components/ui/cards/main/ItemCard';
 import Error from '@/components/ui/load/Error';
 import Loading from '@/components/ui/load/Loading';
-import { Flex } from '@chakra-ui/react';
+import MainWrapper from '@/components/ui/wrappers/body/MainWrapper';
 
 interface props {
   params:IParams
@@ -16,14 +16,11 @@ function page({params:{id}}:props):JSX.Element {
  const {data,isError,isLoading} = useGetUserQuery<query>(id);
   if (isLoading) return <Loading />;
   if (isError) return <Error />;
-  console.log(data)
+
   return (
     <>
       <AccordionCard id={id} />
-      <Flex w='90%' flexWrap='wrap'
-        rowGap={10} columnGap={10}
-        justifyContent='center'
-        m='10px auto'>
+      <MainWrapper>
         {data&&data.posts.map((i:IPost):JSX.Element=>(
          <ItemCard
           key={i._id}
@@ -32,7 +29,7 @@ function page({params:{id}}:props):JSX.Element {
           title={i.title}
          />
         ))}
-      </Flex>
+      </MainWrapper>
     </>
   )
 }
